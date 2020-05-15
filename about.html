@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yoshi's Profile Site</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      main .container {
+        text-align: left;
+      }
+      main h1 {
+        font-size: 2.8rem;
+      }
+      main h2 {
+        font-size: 2.2rem;
+        padding: 0;
+        background: linear-gradient(transparent 60%, #D6BCCE);
+        padding-top: 3vw;
+      }
+      main p {
+        font-size: 1.6rem;
+        padding-top: 1vw;
+      }
+      main h3 {
+        font-size: 2rem;
+        padding-top: 1.5vw;
+      }
+      ol li {
+        font-size: 1.4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Yoshi's Profile Site</h1>
+      </div>
+      <div class="container">
+        <div class="contents">
+          <ul>
+            <li><a class="content" href="top.html">作品</a></li>
+            <li><a class="content" href="about.html">このサイトについて</a></li>
+            <li><a class="content" href="yoshi.html">自己紹介</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h1>はじめに</h1>
+        <p>このサイトは私が初めて作ったものです。全ページレスポンシブ対応となっております。とてもシンプルなものですが、今後はもっと動きのあるアクティブなサイトを作れるように、継続してプログラミングを学習していきたいと思います。</p>
+
+        <h2>Yoshi's Profile Siteについて</h2>
+        <p>サイト全体の色に統一感を出したかったので、背景色はhslで作り、和テイストな色合いを目指しました。また、フォントサイズについては基本的にはremを使い、widthやheightはvwを使いました。フッターにはJavaScriptでページの切り替わりごとにランダムに短いメッセージが表示されるようにしました。自己紹介のページでJavascriptを使ってトップの画像が一定時間で切り替わるようにしました。</p>
+
+        <h2>ラオスバックパッカー旅行記</h2>
+        <p>自分の旅行体験とそのときに撮った写真を元にサイトを作りました。宿の名称や住所などを一部変えています。jQueryでドロップダウンメニューを作り、日本語と英語表記を切り替えられるようにしました。英語は全て自分で翻訳しました。</p>
+
+        <h3>ハンバーガーメニュー</h3>
+        <p>ヘッダーのハンバーガーメニューをJavaScriptで実装しました。bodyとメニューリストをposition: absoluteで左上に固定し、メニューリストだけ左側x軸方向にwidth分ずらして画面外に設置し、barをクリックして全体をx軸方向右にwidth分動かすという手法を取りました。barをクリックしたときに画面がスクロールしないようにbodyにクラスを与えてoverflow: hiddenで固定しました。メニューを閉じるときに付与したクラスを取り除く処理をしました。</p>
+
+        <h3>問題点</h3>
+        <ol>
+          <li>メニューのリンクをクリックしてリンク先に飛んだ後、クラスが残っていたため、画面がスクロールできないという問題が発生しました。</li>
+          <li>リンク先に飛んだ後、idで狙った位置にスクロールされず、上の方にズレてしまいました。</li>
+        </ol>
+
+        <h3>解決策</h3>
+        <ol>
+          <li>メニューのリンクを全てdocument.querySelectorAll()で取得してforEach構文でクラスを取り除きました。</li>
+          <li>移動先をspanタグで囲って、ズレは多少軽減されましたが、まだ大分ズレています。そこで、全体をX軸方向に動かすのをやめて、barをクリックしたときにmenuのほうに.openクラスを与えて.
+        position: absoluteとz-indexを用いてmenuだけを全体に被せることにしました。その結果、メニューの中身をクリックしてリンク先にとんでも、スクロールがズレることがなくなりました。</li>
+        </ol>
+
+        <h3>スライドショー</h3>
+        <p>JavaScriptで制作しました。以下おおまかな手順をメモにしておきます。</p>
+
+        <ol>
+          <li>サムネイル,メインの画像を入れるdivと各ボタンにidを設定し、JavaScriptで定数として取得します。</li>
+          <li>定数imagesでサムネイルの画像を配列で取得します。</li>
+          <li>createElementでimgを作り、デフォルトのメイン画像にimages[0]を配置し#mainにappendChildで作った要素を入れます。</li>
+          <li>imagesをforEach構文を使って配列内の画像を#thumbnailsに入れます。</li>
+          <li>変数currentNumを宣言し、0を代入します。</li>
+          <li>#prevにクリックイベントを設定してサムネイルをメインの画像に代入できるようにします。If文でcurrentNumが0未満の時に配列の最後のindexを代入するようにします。同じような工程で#nextも作ります。</li>
+          <li>#playにクリックイベントをつけます。setTimeoutで2000ミリ秒でサムネイルが流れる機能を実装します。</li>
+          <li>#stopのクリックイベントでclearTimeoutで停止ボタンを作ります。</li>
+          <li>#playを連打すると一回で#stopが効かなくなるので、変数nowPlayingを宣言しfalseで初期化、trueのときは#playの処理が止まるようにreturnで返します。</li>
+        </ol>
+
+        <h3>問題点</h3>
+        <p>サムネイルをflexboxで並べて、justify-content: space-between;で表示したところ、最終行のアイテム同士の隙間が不自然でした。</p>
+
+        <h3>解決策</h3>
+        <p>flexboxではなくgridを使い最後の行を左寄せにすることができました。</p>
+
+        <h3>＊追加機能および問題点</h3>
+        <p>画像だけでは味気ないので、画像の配列にオブジェクトでテキストtのプロパティを持たせて画像と一言メッセージをセットで表示させました。その際、サムネイルをクリックしたとき、前の画像のメッセージが残って、際限なく重なってしまうという問題が起こりました。</p>
+
+        <h3>解決策</h3>
+        <p>while文で残っている一言メッセージをその都度消去するという関数を作り、サムネイルをクリックしたとき、next,prevボタンを押したときにその関数を使って解決しました。</p>
+
+        <h3>コンタクトフォーム</h3>
+        <p>今回はinputとlabelを使ってフォームの形だけ作ってみました。ボタンはbox-shadowで立体的に見えるようにしました。</p>
+
+        <h3>問題点</h3>
+        <ol>
+          <li>inputにborder-radiusを設定すると、ボーダーの上と左右が太くなってしまいました。</li>
+          <li>inputにwidth: 100%;を設定すると、containerからはみ出ました。</li>
+        </ol>
+
+        <h3>解決策</h3>
+        <ol>
+          <li>inputにborderを設定し直しました。</li>
+          <li>box-sizing: border-box;で解決しました。</li>
+        </ol>
+
+        <h2>漢字クイズ</h2>
+        <p>JavaScriptで漢字の3択クイズを作りました。内容は日本語初級者向けとなっています。こちらもレスポンシブ対応となっています。こちらもざっくりと手順を記します。</p>
+
+        <ol>
+          <li>html, cssで外観を作ります。問題文と選択肢、次に進むボタンにidをつけます。</li>
+          <li>要素をgetElementByIdで取得し、配列でクイズの中身を作りました。オブジェクトで問題文と選択肢のプロパティを持たせました。選択肢のオブジェクトは配列で持ち、0番目に必ず正答を置くようにしました。</li>
+          <li>何番目の問題かを表すため、変数cullentNumを宣言し、問題文と選択肢をそれぞれのidに埋め込みます。</li>
+          <li>シャッフル・イェーツのシャッフルを関数でまとめて、選択肢をシャッフルします。</li>
+          <li>選択肢をクリックした時に正誤判定ができるように、answerCheck関数を作ります。クリックした後に他の選択肢を選べないように、変数isAnsweredを作り、trueの時は処理を止めるようにしました。</li>
+          <li>ボタンにクリックイベントをつけて、次の問題に進めるようにします。</li>
+          <li>変数scoreを宣言して、正解するごとにscore++となるようにします。</li>
+          <li>終了後にスコアを表示するための領域をhtml,cssで作り、採点までは画面外に置いておくようにしました。</li>
+        </ol>
+
+        <h3>問題点</h3>
+        <p>選択肢をシャッフルする時、もとの配列が変わってしまい、正誤判定ができない。</p>
+
+        <h3>解決策</h3>
+        <p>スプレッド演算子で元の配列を展開し、大括弧をつけてからシャッフルしました。</p>
+      </div>
+    </main>
+    <footer>
+      <!-- ランダムにメッセージが現れるようにする。 -->
+    </footer>
+    <script src="js/main.js"></script>
+  </body>
+</html>
