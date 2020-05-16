@@ -4,6 +4,110 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Yoshi's Profile Site</title>
+    <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yoshi's Profile Site</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Yoshi-Hiraoka/MyPortfolio/master/favicon.ico">
+    <link rel="stylesheet" href="https://yoshi-hiraoka.github.io/MyPortfolio/styles.css">
+    <style>
+      img {
+        width: 100vw;
+        margin: 0 auto;
+        vertical-align: bottom;
+      }
+      .introduction {
+        padding: 5vw;
+      }
+      @media (min-width: 600px) {
+        section {
+          display: flex;
+          justify-content: space-between;
+          padding: 5vw 8vw;
+        }
+        img {
+          width: 40vw;
+          border-radius: 50%;
+        }
+        .introduction {
+          width: 40vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Yoshi's Profile Site</h1>
+      </div>
+      <div class="container">
+        <div class="contents">
+          <ul>
+            <li><a class="content" href="index.html">作品</a></li>
+            <li><a class="content" href="about.html">このサイトについて</a></li>
+            <li><a class="content" href="yoshi.html">自己紹介</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div id="slideShow">
+
+      </div>
+      <div class="introduction">
+        <h1>平岡 義雅</h1>
+        <p>1986年11月15日生まれ。フィリピンセブ市在住。法政大学経済学部経済学科卒業。大学卒業後、近所にボクシングジムがあったことがきっかけでプロボクシングのC級ライセンスを取得する。20代半ばを過ぎるまで、バイクにテントを積んで日本中を走り周り、季節労働に従事しながら移動型ホームレスとして生活する。その後、オフィスワーカーの経験を求めて上京し、経理としておよそ4年間働く。とあるきっかけで退社後、オーストラリアで2年間のワーキングホリデー生活に突入。最終的には英語指導者（TESOL）の資格を取得するに至る。語学の魅力にとりつかれ、新たにスペイン語の習得を目指している。現在はセブ市で翻訳家および日本語講師として働いている。</p>
+      </div>
+    </section>
+
+    <footer>
+      <!-- ランダムにメッセージが現れるようにする。 -->
+    </footer>
+    <script src="https://yoshi-hiraoka.github.io/MyPortfolio/main.js"></script>
+    <script>
+      'use strict'
+
+      {
+        const slideShow = document.getElementById('slideShow');
+
+        const images = [
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img2.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img0.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img6.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img7.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img5.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img3.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img4.jpg?raw=true',
+        'https://github.com/Yoshi-Hiraoka/MyPortfolio/blob/master/img1.jpg?raw=true',
+        ]
+        let currentNum = 0;
+
+        const img = document.createElement('img');
+        slideShow.appendChild(img);
+
+        function play() {
+          img.src = images[currentNum];
+          currentNum++;
+          if (currentNum > images.length - 1) {
+            return img.src = images[images.length - 1];
+          }
+        }
+        function autoPlay() {
+          play();
+          setTimeout(() => {
+            autoPlay();
+          }, 3500);
+        }
+        window.addEventListener('load', () => {
+          autoPlay();
+        });
+
+       }
+    </script>
+  </body>
+</html>
     <link rel="stylesheet" href="https://yoshi-hiraoka.github.io/MyPortfolio/styles.css">
     <style>
       main .container {
