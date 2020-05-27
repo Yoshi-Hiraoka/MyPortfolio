@@ -98,19 +98,26 @@ footer > h1 {
   }
   .works {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   .works section {
-    width: 25vw;
-    height: 23vw;
+    width: 38vw;
+    height: 35vw;
   }
   .works > section > p {
     padding-top: 2vw;
+    font-size: 1.2rem;
   }
   footer {
     height: 15vw;
   }
   footer h1 {
     line-height: 15vw;
+  }
+}
+@media (min-width: 760px) {
+  .works > section > p {
+    font-size: 1.6rem;
   }
 }
